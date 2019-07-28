@@ -179,6 +179,6 @@ app.get('/hello',function(req,res){
     res.json("Hello World")
   });
 //Définition et mise en place du port d'écoute
-const port = 8000;
+const port = process.env.PORT || 8000;
 http.listen(port, () => console.log(`Listening on port ${port}`));
 

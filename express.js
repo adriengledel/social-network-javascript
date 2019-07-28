@@ -20,7 +20,13 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static("client/build"));
+}
+else{
+  app.use(express.static("public"));
+}
 
 //routes
 app.use('/', signupRoute);
