@@ -92,9 +92,9 @@ class InputSearch extends React.Component{
   }
 
   render(){
-    const { items=[], onChange, placeholder } = this.props;
+    const { items=[], onChange, placeholder, className, noLink, userSelect } = this.props;
     return(
-      <Container>
+      <Container className={className}>
         <ContainerInput>
           <SearchImg 
             src={SearchImgPng}
@@ -108,9 +108,9 @@ class InputSearch extends React.Component{
         <ContainerList>
         {
           this.state.showList ?
-            <List onBlur={this.handleFocusInput}>
+            <List onBlur={this.handleFocusInput} onClick={this.handleFocusInput}>
               {
-                items.map(item => <RowUser key={item._id} user={item}/> )
+                items.map(item => <RowUser onClick={userSelect} noLink={noLink} key={item._id} user={item}/> )
               }
             </List> : null
         }

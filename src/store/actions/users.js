@@ -7,6 +7,12 @@ export const updateUser = (userId, data) => {
   };
 }
 
+export const deleteUser = (userId) => {
+  return (dispatch, getState) => {
+    API.deleteUser({userId});
+  }
+}
+
 const loadUser = (user) => ({
   type : 'LOAD_USER',
   user

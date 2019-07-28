@@ -2,7 +2,7 @@ import mongoose   from "mongoose";
 import app from './express';
 import {friendRequest, updateFriend, recommendFriend, validRecommendFriend, deleteFriend} from './controllers/friend';
 import { messageRequest, deleteMessage, responseRequest, deleteResponse } from './controllers/walls';
-import { updateUser, isLogged, isLogout } from './controllers/users';
+import { updateUser, deleteUser, isLogged, isLogout } from './controllers/users';
 import jwt from 'jsonwebtoken';
 require('dotenv').config();
 const config = require('./config/config'); 
@@ -21,7 +21,7 @@ import {
 mongoose.set('useFindAndModify', false);
 //Connexion à la base de donnée
 mongoose.connect(process.env.MONGO_URL || "mongodb://user:SocialNetwork2019@ds255917.mlab.com:55917/heroku_gxtmpwhk", { useNewUrlParser: true }).then(() => {
-    console.log('Connected to mongoDB')
+    console.log('Connected to mongoDB', process.env.MONGO_URL)
 }).catch(e => {
     console.log('Error while DB connecting');
     console.log(e);
@@ -140,6 +140,10 @@ io.on('connection', function(socket){
     socket.on('updateUser', data => {
       console.log('updateUser', data);
       updateUser(data, socket);
+    });
+    socket.on('deleteUser', data => {
+      console.log('deleteUser', data);
+      deleteUser(data, socket);
     });
     socket.on('logout', id => {
       console.log('user disconnected');

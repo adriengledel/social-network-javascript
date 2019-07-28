@@ -125,11 +125,12 @@ class RowUser extends React.Component{
       addButton, 
       onClickAdd, 
       deleteButton, 
-      deleteFriend 
+      deleteFriend,
+      className
     } = this.props;
-
+    console.log(userId)
     return(
-      <Container onClick={onClick}>
+      <Container onClick={ onClick ? () => onClick(user._id) : null} className={className}>
         {
           noLink ?
           <Left>
@@ -139,7 +140,7 @@ class RowUser extends React.Component{
               <UserWithoutAvatar >
                 {(user.firstName   || ' ')[0].toUpperCase()}
                 {(user.lastName  || ' ')[0].toUpperCase()}
-            </UserWithoutAvatar>
+              </UserWithoutAvatar>
           }
           <Name>
             {user.firstName} {user.lastName}

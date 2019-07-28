@@ -16,8 +16,8 @@ export default {
     isAuth : function() {
         return (localStorage.getItem('token') !== null);
     },
-    logout : function() {
-        localStorage.clear();
+    logout : function(send){
+        return socket.disconnect();
     },
     lostpassword : function(send) {
         console.log(send)
@@ -80,8 +80,8 @@ export default {
     updateUser : function(send){
         return socket.emit("updateUser", send);
     },
-    logout : function(send){
-        return socket.disconnect();
-    }
+    deleteUser : function(send){
+        return socket.emit("deleteUser", send);
+    },
 
 }
