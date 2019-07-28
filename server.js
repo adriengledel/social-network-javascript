@@ -19,6 +19,13 @@ import {
 } from './controllers/topic';
 
 mongoose.set('useFindAndModify', false);
+//Connexion à la base de donnée
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }).then(() => {
+    console.log('Connected to mongoDB')
+}).catch(e => {
+    console.log('Error while DB connecting');
+    console.log(e);
+});
 
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
@@ -167,17 +174,8 @@ io.on('connection', function(socket){
   });
 });
 
-//Connexion à la base de donnée
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }).then(() => {
-    console.log('Connected to mongoDB')
-}).catch(e => {
-    console.log('Error while DB connecting');
-    console.log(e);
-});
 
-app.get('/hello',function(req,res){
-    res.json("Hello World")
-  });
+app.get('*', (req, res) => {    res.sendfile(path.join(__dirname = 'client/build/index.html'));  });
 //Définition et mise en place du port d'écoute
 const port = process.env.PORT || 8000;
 http.listen(port, () => console.log(`Listening on port ${port}`));
