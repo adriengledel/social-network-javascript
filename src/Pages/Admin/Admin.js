@@ -136,7 +136,7 @@ class Admin extends React.Component{
           null
         }
         {
-          friendsItems.length ?
+          friendsItems.length > 0 ?
           <ContainerFriends>
             <FriendsHead>Ses amis :</FriendsHead>
             {

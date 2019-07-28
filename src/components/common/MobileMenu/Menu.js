@@ -1,22 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { colors } from 'styles';
+
 const Container = styled.div.attrs(({open}) => ({
     style :{
       height :  open ?  '': 0
     }
 }))`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    display: flex;
+    position : absolute;
+    top        : 0;
+    left       : 0;
+    width      : 100vw;
+    display    : flex;
+    background : ${colors.menuMobile};
+    opacity    : 0.95;
+    color      : #fafafa;
+    transition : height 0.3s ease;
+    z-index    : 2;
     flex-direction: column;
-    background: black;
-    opacity: 0.95;
-    color: #fafafa;
-    transition: height 0.3s ease;
-    z-index: 2;
 `;
 
 const MenuList = styled.div`

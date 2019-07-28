@@ -68,6 +68,7 @@ export const dimensions = {
     backgroundHighLight : '#343f56',
     menuHamueger : '#3b4559',
     topicNoSeleted : '#3e608a',
+    menuMobile : '#13161c',
 
     redElectron : '#ed3d4f'
     

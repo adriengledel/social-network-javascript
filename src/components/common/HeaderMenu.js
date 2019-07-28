@@ -21,7 +21,7 @@ class HeaderMenu extends React.Component {
         return(
             <div style={{zIndex:2}}>
                 <Mobile>
-                    <MenuHamburger />
+                    <MenuHamburger history={history}  />
                 </Mobile>
                 <Desktop>
                     <MenuInline history={history} />

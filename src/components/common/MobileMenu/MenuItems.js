@@ -1,5 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+import { colors } from 'styles';
+
+const palette = [colors.blueElectron, colors.yellowElectron, colors.greenElectron, colors.purpleElectron]
 
 const Container = styled.div.attrs(({delay}) => ({
     style : {
@@ -16,9 +21,10 @@ const Container = styled.div.attrs(({delay}) => ({
     }
     opacity   : 0;
     animation : 1s appear forwards;
+    height : 50px;
 `;
 
-const Item = styled.div.attrs(({delay}) => ({
+const Item = styled.a.attrs(({delay}) => ({
   style : {
     animationDelay : delay
   }
@@ -37,12 +43,30 @@ const Item = styled.div.attrs(({delay}) => ({
         transform: translateX(0);
       }
     }
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     padding: 1rem 0;
     margin: 0 5%;
     cursor: pointer;
     transition: color 0.2s ease-in-out;
     animation: 0.5s slideIn forwards;
+    color : ${colors.redElectron};
+    text-decoration : none;
+
+`;
+
+const ItemLink = styled(Link).attrs(({index}) => ({
+    style : {
+      color : palette[index]
+    }
+}))`
+    text-decoration : none;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    margin: 0 5%;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    animation: 0.5s slideIn forwards;
+    cursor : pointer;
 
 `;
 
@@ -69,14 +93,24 @@ const Line = styled.div.attrs(({delay}) => ({
 
 class MenuItem extends React.Component{
     render(){
-      const { delay } = this.props;
+      const { delay, item, index, feature, disconnect } = this.props;
       return(
         <Container delay={delay}>
-          <Item 
-            onClick={this.props.onClick}
-          >
-            {this.props.children}  
-          </Item>
+          {
+            feature ?
+              <Item
+              onClick={()=>disconnect()}
+              href='/'
+              >
+                {this.props.children} 
+              </Item> :
+              <ItemLink 
+                to={item.link}
+                index={index}
+              >
+                {this.props.children}  
+              </ItemLink>
+          }
         <Line/>
       </Container>  
       )

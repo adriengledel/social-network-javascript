@@ -20,7 +20,7 @@ import {
 } from 'Routes/Paths.js';
 
 const Container = styled.div`
-
+  
 `;
 
 const Head = styled.div`
@@ -28,8 +28,9 @@ const Head = styled.div`
 `;
 
 const Content = styled.div`
-  margin-top : 50px;
-  flex : 1;
+  display : flex;
+  flex-direction : row;
+  justify-content : space-between;
   background-color : ${colors.background};
 `;
 
@@ -48,7 +49,17 @@ const User = styled(Link)`
   color : white;
 `;
 
-class ProfilPageMobile extends React.Component{
+const SettingFriends = styled(FriendsList)`
+  width : 400px;
+  flex : none;
+`;
+
+const Chat = styled(Forum)`
+  width : 400px;
+  flex : none;
+`;
+
+class ProfilPageDesktop extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -115,27 +126,15 @@ class ProfilPageMobile extends React.Component{
               <Avatar user={user} />  
               {user.pseudo}
             </User>
-            <SwitchContainer>
-              <SwitchButton
-                items={[
-                  {value : 'gestion', name : 'Gestions des Amis'},
-                  {value : 'fil', name : 'Fil d"actualité'},
-                  {value : 'chat', name : 'Chat Forum'}
-                ]}
-                value={this.state.value}
-                onSelect={this.handleViewChange}
-              />
-            </SwitchContainer>
             <InputSearchList 
               items={filteredItems}
               onChange={this.handleSearch}
               placeholder="Rechercher"
             />
           </Head>
+
           <Content>
-            {
-              this.state.value === 'gestion' ?
-              <FriendsList
+              <SettingFriends
                 user={user} 
                 users={users}
                 friends={friends}
@@ -144,14 +143,12 @@ class ProfilPageMobile extends React.Component{
                 valideRecommendRequest={valideRecommendRequest}
                 ignoreRecommendRequest={ignoreRecommendRequest}
                 deleteFriend={deleteFriend}
-              /> :
-              this.state.value === 'chat' ?
-              <Forum 
+              /> 
+              <Chat 
                 friends={myFriendsConfirmed}
                 users={users}
                 messages={messages}
-              /> : null
-            }
+              />
           </Content>
         </Container>
       </LandingPage>
@@ -159,5 +156,5 @@ class ProfilPageMobile extends React.Component{
   }
 }
 
-export default ProfilPageMobile;
+export default ProfilPageDesktop;
 

@@ -14,6 +14,7 @@ import { loadFriends }    from 'store/actions/friends';
 import { usersConnected } from 'store/actions/usersConnected'; 
 
 import ProfilPageMobile from './mobile/ProfilPageMobile';
+import ProfilPageDesktop from './deskstop/ProfilPageDesktop';
 
 import { token } from '../LoginPage/LoginPage';
 
@@ -32,7 +33,8 @@ class ProfilPage extends React.Component{
     super(props);
 
     this.state = {
-      messages : this.props.topics
+      messages : this.props.topics,
+      view     : ''
     }
 
     this.handleAcceptRequest               = this.handleAcceptRequest.bind(this);
@@ -87,6 +89,9 @@ class ProfilPage extends React.Component{
 
   componentDidMount(){
     this.props.updateDatas();
+    if(window.innerWidth < 1000){
+      this.setState({ view : 'mobile'});
+    }
   }
   
  
@@ -122,18 +127,33 @@ class ProfilPage extends React.Component{
     const { users, user, friends, history } = this.props;
     return(
       <Container>
-        <ProfilPageMobile 
-          users={users}
-          user={user}
-          friends={friends}
-          accepteRequest={this.handleAcceptRequest}
-          ignoreRequest={this.handleIgnoreRequest}
-          valideRecommendRequest={this.handleClickValidRecommendFriend}
-          ignoreRecommendRequest={this.handleClickIgnoreRecommendFriend}
-          deleteFriend={this.handleClickDeleteFriend}
-          messages={this.state.messages}
-          history={history}
-        />
+        {
+          this.state.view === 'mobile' ?
+          <ProfilPageMobile 
+            users={users}
+            user={user}
+            friends={friends}
+            accepteRequest={this.handleAcceptRequest}
+            ignoreRequest={this.handleIgnoreRequest}
+            valideRecommendRequest={this.handleClickValidRecommendFriend}
+            ignoreRecommendRequest={this.handleClickIgnoreRecommendFriend}
+            deleteFriend={this.handleClickDeleteFriend}
+            messages={this.state.messages}
+            history={history}
+          /> :
+          <ProfilPageDesktop 
+            users={users}
+            user={user}
+            friends={friends}
+            accepteRequest={this.handleAcceptRequest}
+            ignoreRequest={this.handleIgnoreRequest}
+            valideRecommendRequest={this.handleClickValidRecommendFriend}
+            ignoreRecommendRequest={this.handleClickIgnoreRecommendFriend}
+            deleteFriend={this.handleClickDeleteFriend}
+            messages={this.state.messages}
+            history={history}
+          />
+        }
       </Container>
     );
   }
