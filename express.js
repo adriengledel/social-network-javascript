@@ -8,8 +8,8 @@ import lostpassword from './routes/lostpassword';
 require('dotenv').config();
 
 
-/* import path from 'path'
-import cookieParser from 'cookie-parser'
+import path from 'path'
+/* import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import helmet from 'helmet'
 import Template from './../template'
