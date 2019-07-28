@@ -4,7 +4,7 @@ import { socket } from 'Pages/LoginPage/LoginPage';
 const headers = {
     'Content-Type': 'application/json'
 }
-const url = REACT_APP_API_URL;
+const url = process.env.REACT_APP_API_URL;
 
 export default {
     login : function(send){
