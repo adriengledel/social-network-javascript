@@ -20,7 +20,7 @@ import {
 
 mongoose.set('useFindAndModify', false);
 //Connexion à la base de donnée
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }).then(() => {
+mongoose.connect(process.env.MONGO_URL || "mongodb://user:SocialNetwork2019@ds255917.mlab.com:55917/heroku_gxtmpwhk", { useNewUrlParser: true }).then(() => {
     console.log('Connected to mongoDB')
 }).catch(e => {
     console.log('Error while DB connecting');
@@ -175,7 +175,7 @@ io.on('connection', function(socket){
 });
 
 
-app.get('*', (req, res) => {    res.sendfile(path.join(__dirname = 'client/build/index.html'));  });
+
 //Définition et mise en place du port d'écoute
 const port = process.env.PORT || 8000;
 http.listen(port, () => console.log(`Listening on port ${port}`));
