@@ -22,8 +22,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 if(process.env.NODE_ENV === "production"){
-  app.use(express.static(path.join(__dirname, 'src/build')));
-  app.get('/', (req, res) => {    res.sendfile(path.join(__dirname = 'src/build/index.html'));  });
+  app.use(express.static(path.join(__dirname, 'build')));
+  app.get('/', (req, res) => {    res.sendfile(path.join(__dirname = 'build/index.html'));  });
 }
 else{
   app.use(express.static("public"));
