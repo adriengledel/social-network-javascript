@@ -24,7 +24,7 @@ import API from 'utils/API';
 
 
 export var token;
-export var socket = socketIOClient('http://localhost:8000/');
+export var socket = socketIOClient(process.env.REACT_APP_API_URL);
 
 const Container = styled.div`
   height : 100%;

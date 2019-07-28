@@ -4,7 +4,7 @@ import { socket } from 'Pages/LoginPage/LoginPage';
 const headers = {
     'Content-Type': 'application/json'
 }
-const url = "http://localhost:8000"
+const url = REACT_APP_API_URL;
 
 export default {
     login : function(send){
