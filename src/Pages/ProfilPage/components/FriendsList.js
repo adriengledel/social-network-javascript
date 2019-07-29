@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
+import { colors } from 'styles';
+
 import SwitchButton from 'components/common/SwitchButton';
 import InputSearch  from 'components/common/InputSearch';
 
@@ -9,7 +11,8 @@ const Container = styled.div`
   flex           : 1;
   display        : flex;
   flex-direction : column;
-  border         : 1px solid black;
+  border-radius : 4px;
+  color          : white;
 `;
 
 const Head = styled.div`
@@ -20,15 +23,17 @@ const Content = styled.div`
 `;
 
 const SwitchContainer = styled.div`
-  height      : 40px;
+  height      : 50px;
   font-weight : 450;
+  font-size   : 0.8em;
+  border-radius : 4px;
 `;
 
 class FriendsList extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      view : 'amis',
+      view : 0,
       filter : '',
       friends : []
     }
@@ -64,17 +69,25 @@ class FriendsList extends React.Component{
     const requestReceived = allFriends.filter(friend => friend.statusId === 5);
     const recommendReceived = allFriends.filter(friend => friend.statusId === 6);
     const ignored = allFriends.filter(friend => friend.statusId === 4);
+
+    const allItems = [[...friendsConfirmed], [...waitingForConfirmation], [...requestReceived], [...recommendReceived], [...ignored]];
+    console.log(allItems)
+    console.log(allItems[this.state.view]);
+    const filteredItems = allItems[this.state.view].filter(
+      item => users[item.id].firstName.toLowerCase().includes(this.state.filter.trim().toLowerCase()) || 
+              users[item.id].lastName.toLowerCase().includes(this.state.filter.trim().toLowerCase())
+    );
     return(
       <Container className={className}>
         <Head>
           <SwitchContainer>
             <SwitchButton
                 items={[
-                  {value : 'amis', name : 'Amis'},
-                  {value : 'attente', name : 'En attente de confirmation'},
-                  {value : 'demande reçu', name : 'Demande reçu'},
-                  {value : 'recommandation', name : 'Recommandation'},
-                  {value : 'demande refusée', name : 'Demande refusée'}
+                  {value : 0, name : 'Amis',                       color : '#71b1fe'},
+                  {value : 1, name : 'En attente de confirmation', color : '#71b1fe'},
+                  {value : 2, name : 'Demande reçu',               color : '#71b1fe'},
+                  {value : 3, name : 'Recommandation',             color : '#71b1fe'},
+                  {value : 4, name : 'Demande refusée',            color : '#ed3d4f'}
                 ]}
                 value={this.state.view}
                 onSelect={this.handleViewChange}
@@ -83,31 +96,31 @@ class FriendsList extends React.Component{
         </Head>
         <Content>
           {
-            this.state.view === 'amis' ?
+            this.state.view === 0 ?
             <InputSearch
               key='amis'
               showList={true}
-              items={friendsConfirmed}
+              items={filteredItems}
               onChange={this.handleSearch}
               users={users}
               deleteButton
               deleteFriend={deleteFriend}
             /> :
-            this.state.view === 'attente' ?
+            this.state.view === 1 ?
             <InputSearch
               key='attente'
               showList={true}
-              items={waitingForConfirmation}
+              items={filteredItems}
               onChange={this.handleSearch}
               users={users}
               deleteButton
               deleteFriend={deleteFriend}
             /> :
-            this.state.view === 'demande reçu' ?
+            this.state.view === 2 ?
             <InputSearch
               key='demande reçu'
               showList={true}
-              items={requestReceived}
+              items={filteredItems}
               onChange={this.handleSearch}
               users={users}
               userId={user._id}
@@ -115,11 +128,11 @@ class FriendsList extends React.Component{
               onClickLeft={accepteRequest}
               onClickRight={ignoreRequest}
             /> :
-            this.state.view === 'recommandation' ?
+            this.state.view === 3 ?
             <InputSearch
               key='recommandation'
               showList={true}
-              items={recommendReceived}
+              items={filteredItems}
               onChange={this.handleSearch}
               users={users}
               userId={user._id}
@@ -130,7 +143,7 @@ class FriendsList extends React.Component{
             <InputSearch
               key='ignored'
               showList={true}
-              items={ignored}
+              items={filteredItems}
               onChange={this.handleSearch}
               users={users}
               userId={user._id}

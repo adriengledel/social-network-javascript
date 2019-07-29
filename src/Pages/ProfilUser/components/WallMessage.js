@@ -161,6 +161,7 @@ class WallMessage extends React.Component{
   }
 
   handleSendResponse(){
+    console.log('ok')
     const { user, sendResponse, message, userAccount } = this.props;
     const { senderId, recipientId, text, date, id, responses } = message;
     const subId = (responses || []).length+1;
@@ -226,15 +227,16 @@ class WallMessage extends React.Component{
           }
           </Right>
         </Head>
-        <Date>{moment(date).format('D MMMM YYYY HH MM')}</Date>
+        <Date>{moment(date).format('D MMMM YYYY HH mm')}</Date>
         <Message>{text}</Message>
         {
-          responses.map(response => {
+          responses.map((response, index) => {
             let sender = users[response.senderId];
             let recipient = users[response.recipientId];
             return <ContainerResponse 
               onMouseOver={()=>this.setState({hoverResponse : true})}
               onMouseLeave={()=>this.setState({hoverResponse : false})}
+              key={index}
             >
               <Head>
                 <Left>
@@ -272,7 +274,6 @@ class WallMessage extends React.Component{
               <TextArea 
                 onChange={onChange}
                 value={value}
-                onBlur={()=> this.setState({showTextArea : false})}
                 ref={(input) => { this.responseInput = input }} 
               />
               <PublishButton onClick={this.handleSendResponse}>Envoyer</PublishButton>

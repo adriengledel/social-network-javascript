@@ -6,6 +6,7 @@ import socketIOClient from "socket.io-client";
 import { updateDatas } from 'store/update';
 import { updateFriendRequest, validRecommendRequest, deleteFriend } from 'store/actions/friends';
 import { loadWalls } from 'store/actions/walls';
+import { loadWallJS } from 'store/actions/wallJs';
 
 
 import { loadTopics }     from 'store/actions/topics';
@@ -84,12 +85,18 @@ class ProfilPage extends React.Component{
       localStorage.setItem('walls', JSON.stringify(walls));
       this.props.loadWalls(walls);
     });
+
+    socket.on('wallsJSData', (walls) =>{
+      console.log(walls)
+      localStorage.setItem('wallsJS', JSON.stringify(walls));
+      this.props.loadWallJS(walls);
+    });
     
   }
 
   componentDidMount(){
     this.props.updateDatas();
-    if(window.innerWidth < 1000){
+    if(window.innerWidth < 1200){
       this.setState({ view : 'mobile'});
     }
   }
@@ -175,5 +182,6 @@ export default connect( state => ({
   updateUsers,
   loadFriends,
   loadWalls,
-  usersConnected
+  usersConnected,
+  loadWallJS
 })(ProfilPage);

@@ -2,6 +2,7 @@ import User from "../schema/schemaUser.js";
 import friends from "../schema/schemaFriend.js";
 import walls from "../schema/schemaWall";
 import topics from "../schema/schemaTopic";
+import wallJS from "../schema/schemaWallJs";
 import passwordHash from "password-hash";
 
 function login(req, res) {
@@ -36,15 +37,23 @@ function login(req, res) {
                             documents.forEach(function (document) {
                                 wallmessages[document.userId] = document;
                             });
-                            topics.find({}, function(err, topics){
-                                res.status(200).json({
-                                    "token" : user.getToken(),
-                                    "text"  : "Authentification réussi",
-                                    "user"  : user,
-                                    "users" : users,
-                                    "friends" : friends,
-                                    "walls" : wallmessages,
-                                    "topics": topics
+                            wallJS.find({}, function (err, results) {
+                                var wallJs = {};
+                                console.log(results)
+                                results.forEach(function (result) {
+                                    wallJs[result.category] = result;
+                                });
+                                topics.find({}, function(err, topics){
+                                    res.status(200).json({
+                                        "token" : user.getToken(),
+                                        "text"  : "Authentification réussi",
+                                        "user"  : user,
+                                        "users" : users,
+                                        "friends" : friends,
+                                        "walls" : wallmessages,
+                                        "topics": topics,
+                                        "wallJS" : wallJs
+                                    });
                                 });
                             });
                         });

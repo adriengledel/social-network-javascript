@@ -6,17 +6,13 @@ const initialState = {
   topics   : JSON.parse(localStorage.getItem('topics')),
   wallJs   : JSON.parse(localStorage.getItem('wallJS'))
 };
-export const initState = (state=initialState, action) => {
+
+export const wallJSReducer = (state=initialState, action) => {
   switch(action.type){
-    case 'LOAD_INIT_STATE' : 
+    case 'LOAD_WALLS_JS' :
     return {
       ...state,
-      user    : action.user,
-      users   : action.users,
-      friends : action.friends,
-      walls   : action.walls,
-      topics  : action.topics,
-      wallJs  : action.wallJs
+      wallJs : action.wallJs
     };
 
     default : return state;

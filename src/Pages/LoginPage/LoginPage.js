@@ -63,6 +63,7 @@ class LoginPage extends React.Component {
   handleSubmit(data){
     const { history } = this.props;
     API.login(data).then(res => {
+      console.log(res)
       history.push('/profil');
      localStorage.setItem('token', JSON.stringify(res.data.token));
      localStorage.setItem('users', JSON.stringify(res.data.users));
@@ -70,7 +71,8 @@ class LoginPage extends React.Component {
      localStorage.setItem('friends', JSON.stringify(res.data.friends));
      localStorage.setItem('walls', JSON.stringify(res.data.walls));
      localStorage.setItem('topics', JSON.stringify(res.data.topics));
-     this.props.initState(res.data.user, res.data.users, res.data.friends, res.data.walls, res.data.topics);
+     localStorage.setItem('wallJS', JSON.stringify(res.data.wallJS));
+     this.props.initState(res.data.user, res.data.users, res.data.friends, res.data.walls, res.data.topics, res.data.wallJS);
    })
    .catch(err => {
      console.log(err)

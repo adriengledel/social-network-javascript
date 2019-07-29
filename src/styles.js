@@ -57,6 +57,7 @@ export const dimensions = {
 
 
     blueElectron : '#71b1fe',
+    blueElectronHighLight : '#516285',
     blueLightElectron : '#7cafc2',
     skyBlueElectron : '#4FF2F8',
     otherBlue      : '#58b4ff',

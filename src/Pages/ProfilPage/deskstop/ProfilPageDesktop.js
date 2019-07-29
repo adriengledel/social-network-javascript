@@ -12,6 +12,7 @@ import InputSearchList from 'components/common/InputSearchList';
 import FriendsList     from '../components/FriendsList';
 import Avatar          from 'components/common/Avatar';
 import Forum           from '../components/Forum';
+import WallJs          from '../components/WallJs';
 
 import { colors } from 'styles';
 
@@ -20,11 +21,10 @@ import {
 } from 'Routes/Paths.js';
 
 const Container = styled.div`
-  
+  height : 80%;
 `;
 
 const Head = styled.div`
-  margin-top : 50px;
 `;
 
 const Content = styled.div`
@@ -32,6 +32,24 @@ const Content = styled.div`
   flex-direction : row;
   justify-content : space-between;
   background-color : ${colors.background};
+  height           : 100%;
+  align-items      : center;
+`;
+
+const LeftContainer = styled.div`
+  height : 100%;
+  display : flex;
+  flex-direction : column;
+  justify-content : center;
+  margin-right : 30px;
+`;
+
+const RightContainer = styled.div`
+  height : 100%;
+  display : flex;
+  flex-direction : column;
+  justify-content : center;
+  margin-left : 30px;
 `;
 
 const SwitchContainer = styled.div`
@@ -50,12 +68,12 @@ const User = styled(Link)`
 `;
 
 const SettingFriends = styled(FriendsList)`
-  width : 400px;
+  min-width : 350px;
   flex : none;
 `;
 
 const Chat = styled(Forum)`
-  width : 400px;
+  min-width : 350px;
   flex : none;
 `;
 
@@ -91,10 +109,10 @@ class ProfilPageDesktop extends React.Component{
       deleteFriend,
       history
     } = this.props;
-    
-    const usersItems = Object.values(users);
     const myFriends = (friends.filter( friend => friend.id === user._id)[0] || []).userId || [];
     const myFriendsConfirmed = myFriends.filter(friend => friend.statusId === 3);
+    
+    /* const usersItems = Object.values(users);
     let test = [];
     const filteredUser = usersItems.filter( (userItem) => userItem._id !== user._id );
     const filteredFriends = filteredUser.filter( userItem =>{ 
@@ -117,7 +135,7 @@ class ProfilPageDesktop extends React.Component{
       item => item.firstName.toLowerCase().includes(this.state.filter.trim().toLowerCase()) || 
               item.lastName.toLowerCase().includes(this.state.filter.trim().toLowerCase())
     );
-
+ */
     return(
       <LandingPage history={history}>
         <Container>
@@ -126,14 +144,10 @@ class ProfilPageDesktop extends React.Component{
               <Avatar user={user} />  
               {user.pseudo}
             </User>
-            <InputSearchList 
-              items={filteredItems}
-              onChange={this.handleSearch}
-              placeholder="Rechercher"
-            />
           </Head>
 
           <Content>
+            <LeftContainer>
               <SettingFriends
                 user={user} 
                 users={users}
@@ -144,11 +158,19 @@ class ProfilPageDesktop extends React.Component{
                 ignoreRecommendRequest={ignoreRecommendRequest}
                 deleteFriend={deleteFriend}
               /> 
-              <Chat 
-                friends={myFriendsConfirmed}
+            </LeftContainer>
+              <WallJs 
                 users={users}
-                messages={messages}
+                friends={friends}
+                user={user}
               />
+              <RightContainer>
+                <Chat 
+                  friends={myFriendsConfirmed}
+                  users={users}
+                  messages={messages}
+                />
+              </RightContainer>
           </Content>
         </Container>
       </LandingPage>

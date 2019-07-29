@@ -42,7 +42,7 @@ class LandingPage extends React.Component {
               {this.props.children}
             {
               footer ?
-              <LoginFooter /> : <div style={{height:'30px'}}></div>
+              <LoginFooter /> : null
             }  
           </Container>
         </Background>

@@ -8,7 +8,6 @@ import { colors } from 'styles';
 
 const Container = styled.div`
   width           : 100%;
-  border-bottom   : 1px solid black;
   display         : flex;
   flex-direction  : column;
   justify-content : center;
@@ -19,6 +18,7 @@ const ContainerInput = styled.div`
   display        : flex;
   flex-direction : row;
   align-items    : center;
+  border-bottom  : 1px solid white;
 `;
   
 const Input = styled.input`
@@ -42,6 +42,10 @@ const List = styled.div`
   width    : 100%;
   height   : 300px;
   overflow : auto;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-top: 20px;
+  box-shadow: 0px 2px 5px 0px rgba(255,255,255,1);
 `;
 
 

@@ -26,14 +26,8 @@ const sendEmail = (email) => {
   transporter.sendMail(messageRecommendFriend , function(error, info){
     if (error) {
       console.log(error);
-      res.status(200).json({
-        "text": "Invalide email"
-    });
     } else {
       console.log('Email sent: ' + info.response);
-      res.status(200).json({
-        "text": "Succès"
-      });
     }
   });
 

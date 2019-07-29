@@ -3,6 +3,7 @@ import app from './express';
 import {friendRequest, updateFriend, recommendFriend, validRecommendFriend, deleteFriend} from './controllers/friend';
 import { messageRequest, deleteMessage, responseRequest, deleteResponse } from './controllers/walls';
 import { updateUser, deleteUser, isLogged, isLogout } from './controllers/users';
+import { messageJSRequest } from './controllers/wallJs';
 import jwt from 'jsonwebtoken';
 require('dotenv').config();
 const config = require('./config/config'); 
@@ -145,6 +146,11 @@ io.on('connection', function(socket){
       console.log('deleteUser', data);
       deleteUser(data, socket);
     });
+    socket.on('messageWallJs', data => {
+      console.log('messageWallJs', data);
+      messageJSRequest(data, socket);
+    })
+
     socket.on('logout', id => {
       console.log('user disconnected');
       console.log(socket.id)

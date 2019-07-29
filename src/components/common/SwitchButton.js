@@ -10,16 +10,17 @@ const Switch = styled.div.attrs(({head}) => ({
 }))`
   display        : flex;
   flex-direction : row;
-  align-items : center;
-  height : 40px;
-  border : 1px solid;
-  border-radius : 4px;
-  height : 100%;
+  align-items    : center;
+  height         : 40px;
+  border-radius  : 4px;
+  height         : 100%;
+  overflow       : hidden;
+  border         : 1px solid;
 `;
 
 const Element = styled.div.attrs(({checked, head, items, item}) => ({
   style : {
-    backgroundColor : checked ? colors.blueElectron : '',
+    backgroundColor : checked ? item.color : '',
     color           : !checked && head? colors.switchColor : !checked ? colors.switchGrey : 'white',
     borderRight     : (items.indexOf(item)< items.length-1) ? '1px solid' : '',
     borderColor     : head ? colors.switchColor : colors.buttonDashed

@@ -52,6 +52,10 @@ const List = styled.div`
 
 `;
 
+const User = styled(RowUser)`
+  background-color : ${colors.blueElectronHighLight};
+`;
+
 const ListFriends = styled.div``;
 
 const Row = styled.div`
@@ -110,7 +114,7 @@ class InputSearch extends React.Component{
           this.state.showList ?
             <List onBlur={this.handleFocusInput} onClick={this.handleFocusInput}>
               {
-                items.map(item => <RowUser onClick={userSelect} noLink={noLink} key={item._id} user={item}/> )
+                items.map(item => <User onClick={userSelect} noLink={noLink} key={item._id} user={item}/> )
               }
             </List> : null
         }

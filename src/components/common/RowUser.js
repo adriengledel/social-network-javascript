@@ -18,7 +18,7 @@ const Container = styled.div`
   align-items     : center;
   height          : 50px;
   width           : 100%;
-  border-bottom   : 1px solid black;
+  border-bottom   : 1px solid ${colors.background};
   background-color : ${colors.backgroundHighLight};
 `;
 

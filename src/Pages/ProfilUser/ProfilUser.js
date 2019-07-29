@@ -17,6 +17,7 @@ import EditButtonPng      from 'components/img/edit.png';
 import SaveButtonPng      from 'components/img/save.png';
 
 import { colors } from 'styles';
+import { compare } from 'helper/sort';
 
 import { friendRequest, recommendRequest } from 'store/actions/friends';
 import { messageRequest, deleteMessage, responseRequest, deleteResponse, loadWalls } from 'store/actions/walls';
@@ -26,6 +27,8 @@ import { typography } from 'styles';
 
 import { updateUser } from 'store/actions/users';
 import { loadFriends } from 'store/actions/friends';
+import { loadWallJS } from 'store/actions/wallJs';
+
 
 const Container = styled.div`
   display        : flex;
@@ -224,6 +227,12 @@ class ProfileUser extends React.Component{
       localStorage.setItem('walls', JSON.stringify(walls));
       this.props.loadWalls(walls);
     });
+
+    socket.on('wallsJSData', (walls) =>{
+      console.log(walls)
+      localStorage.setItem('wallsJS', JSON.stringify(walls));
+      this.props.loadWallJS(walls);
+    });
   }
   
   handleClickRequestFriend(){
@@ -269,6 +278,7 @@ class ProfileUser extends React.Component{
   }
 
   handleSendResponse(senderId, recipientId, messageId, subMessageId){
+    console.log('ok')
     const { user, users, location } = this.props;
     const id = location.pathname.split('/')[2];
     const email = users[recipientId].email;
@@ -324,6 +334,8 @@ class ProfileUser extends React.Component{
     });
 
     const myMessages = ((walls || [])[id] || []).messages || [];
+    const messagesSortByDate = myMessages.sort(compare);
+    console.log(messagesSortByDate)
     
     return(
       <LandingPage history={history}>
@@ -375,7 +387,7 @@ class ProfileUser extends React.Component{
             <Messages>
               {
                 user.role === "admin" || user._id === id || (status[(friendProfil[0] || []).statusId] || []).name === "Ami" ?
-                myMessages.map((message, index) => 
+                messagesSortByDate.map((message, index) => 
                   <WallMessage
                   key={index}
                   walls={walls} 
@@ -424,6 +436,7 @@ export default connect(
     updateUser,
     updateUsers,
     loadFriends,
-    loadWalls
+    loadWalls,
+    loadWallJS
   }
 )(ProfileUser);

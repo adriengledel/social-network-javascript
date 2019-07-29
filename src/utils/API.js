@@ -83,5 +83,7 @@ export default {
     deleteUser : function(send){
         return socket.emit("deleteUser", send);
     },
-
+    messageWallJS :  function(send){
+        return socket.emit("messageWallJs", send);
+    },
 }
