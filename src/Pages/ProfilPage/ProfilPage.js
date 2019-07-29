@@ -88,7 +88,7 @@ class ProfilPage extends React.Component{
 
     socket.on('wallsJSData', (walls) =>{
       console.log(walls)
-      localStorage.setItem('wallsJS', JSON.stringify(walls));
+      localStorage.setItem('wallJS', JSON.stringify(walls));
       this.props.loadWallJS(walls);
     });
     

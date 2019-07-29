@@ -12,6 +12,7 @@ import InputSearchList from 'components/common/InputSearchList';
 import FriendsList     from '../components/FriendsList';
 import Avatar          from 'components/common/Avatar';
 import Forum           from '../components/Forum';
+import WallJs          from '../components/WallJs';
 
 import { colors } from 'styles';
 
@@ -118,9 +119,9 @@ class ProfilPageMobile extends React.Component{
             <SwitchContainer>
               <SwitchButton
                 items={[
-                  {value : 'gestion', name : 'Gestions des Amis'},
-                  {value : 'fil', name : 'Fil d"actualité'},
-                  {value : 'chat', name : 'Chat Forum'}
+                  {value : 'gestion', name : 'Gestions des Amis', color : '#71b1fe'},
+                  {value : 'fil', name : 'Fil d"actualité', color : '#71b1fe'},
+                  {value : 'chat', name : 'Chat Forum', color : '#71b1fe'}
                 ]}
                 value={this.state.value}
                 onSelect={this.handleViewChange}
@@ -150,7 +151,12 @@ class ProfilPageMobile extends React.Component{
                 friends={myFriendsConfirmed}
                 users={users}
                 messages={messages}
-              /> : null
+              /> : 
+              <WallJs 
+                users={users}
+                friends={friends}
+                user={user}
+              />
             }
           </Content>
         </Container>

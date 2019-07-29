@@ -15,7 +15,8 @@ import { colors } from 'styles';
 
 const Container = styled.div`
   height         : 100%;
-  flex           : 2;
+  width          : 100%;
+  flex           : 1;
   display        : flex;
   flex-direction : column;
   border-radius : 4px;

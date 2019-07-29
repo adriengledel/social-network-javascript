@@ -42,6 +42,7 @@ const LeftContainer = styled.div`
   flex-direction : column;
   justify-content : center;
   margin-right : 30px;
+  min-width : 400px;
 `;
 
 const RightContainer = styled.div`
@@ -50,6 +51,15 @@ const RightContainer = styled.div`
   flex-direction : column;
   justify-content : center;
   margin-left : 30px;
+  min-width : 400px;
+`;
+
+const MiddleContainer = styled.div`
+  display : flex;
+  flex-direction : column;
+  height : 100%;
+  width : 100%;
+  align-items : center;
 `;
 
 const SwitchContainer = styled.div`
@@ -68,13 +78,27 @@ const User = styled(Link)`
 `;
 
 const SettingFriends = styled(FriendsList)`
-  min-width : 350px;
+  min-width : 400px;
   flex : none;
 `;
 
 const Chat = styled(Forum)`
-  min-width : 350px;
+  min-width : 400px;
   flex : none;
+`;
+
+const Title = styled.div`
+  color : ${colors.yellowElectron};
+  text-align : center;
+  font-size : 25px;
+  margin-bottom : 25px;
+`;
+
+const TitleActuality = styled.div`
+  color : ${colors.yellowElectron};
+  text-align : center;
+  font-size : 25px;
+  margin-top : -50px;
 `;
 
 class ProfilPageDesktop extends React.Component{
@@ -148,6 +172,7 @@ class ProfilPageDesktop extends React.Component{
 
           <Content>
             <LeftContainer>
+              <Title>Gestion des Amis</Title>
               <SettingFriends
                 user={user} 
                 users={users}
@@ -159,12 +184,16 @@ class ProfilPageDesktop extends React.Component{
                 deleteFriend={deleteFriend}
               /> 
             </LeftContainer>
+            <MiddleContainer>
+              <TitleActuality>Fil d'actualité</TitleActuality>
               <WallJs 
                 users={users}
                 friends={friends}
                 user={user}
-              />
+                />
+            </MiddleContainer>
               <RightContainer>
+                <Title>Chat</Title>
                 <Chat 
                   friends={myFriendsConfirmed}
                   users={users}
