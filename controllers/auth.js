@@ -2,7 +2,7 @@ import User from "../schema/schemaUser.js";
 import friends from "../schema/schemaFriend.js";
 import walls from "../schema/schemaWall";
 import topics from "../schema/schemaTopic";
-import wallJS from "../schema/schemaWallJs";
+import wallJS from "../schema/schemaWalljs";
 import passwordHash from "password-hash";
 
 function login(req, res) {
