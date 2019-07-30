@@ -76,13 +76,11 @@ class Admin extends React.Component{
     this.handleClickDeleteUser   = this.handleClickDeleteUser.bind(this);
 
     socket.on('updateUsers', (datas) =>{
-      console.log(datas)
       localStorage.setItem('users', JSON.stringify(datas));
       this.props.updateUsers(datas);
     });
 
     socket.on('friendsData', (friends) =>{
-      console.log(friends)
       localStorage.setItem('friends', JSON.stringify(friends));
       this.props.loadFriends(friends);
     });
@@ -115,7 +113,6 @@ class Admin extends React.Component{
     );
 
     const friendsItems = friends.filter(friend => friend.id === (users[this.state.userSelected] || [])._id);
-    console.log(friendsItems);
     return(
       <LandingPage>
       <Content>

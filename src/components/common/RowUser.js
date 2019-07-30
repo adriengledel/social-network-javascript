@@ -128,7 +128,6 @@ class RowUser extends React.Component{
       deleteFriend,
       className
     } = this.props;
-    console.log(userId)
     return(
       <Container onClick={ onClick ? () => onClick(user._id) : null} className={className}>
         {

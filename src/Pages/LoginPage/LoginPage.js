@@ -54,7 +54,6 @@ class LoginPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     socket.on('usersConnected', (datas) => {
-      console.log(datas);
       this.setState({usersConnected : datas.length});
     });
 
@@ -63,7 +62,6 @@ class LoginPage extends React.Component {
   handleSubmit(data){
     const { history } = this.props;
     API.login(data).then(res => {
-      console.log(res)
       history.push('/profil');
      localStorage.setItem('token', JSON.stringify(res.data.token));
      localStorage.setItem('users', JSON.stringify(res.data.users));

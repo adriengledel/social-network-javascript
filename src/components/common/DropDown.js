@@ -40,7 +40,6 @@ class DropDown extends React.Component {
   }
 
   handleButtonClick(event) {
-    console.log('ok')
     this.setState({visible : !this.state.visible});
   }
 

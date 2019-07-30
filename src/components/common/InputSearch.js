@@ -84,7 +84,6 @@ class InputSearch extends React.Component{
       deleteButton,
       deleteFriend 
     } = this.props;
-    console.log(items);
     return(
       <Container>
         <ContainerInput  onBlur={this.handleFocusInput}>

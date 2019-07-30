@@ -21,7 +21,6 @@ export const recommendRequest = (userIdSender, userIdRecipient, userIdRecommend,
 }
 
 export const validRecommendRequest = (userIdSender, userIdRecipient, statusIdSender, statusIdRecipient, email) => {
-  console.log(userIdSender)
   return (dispatch, getState) => {
     API.validRecommendFriendRequest({userIdSender, userIdRecipient, statusIdSender, statusIdRecipient, email});
   };

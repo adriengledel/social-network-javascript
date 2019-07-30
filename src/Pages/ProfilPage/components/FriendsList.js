@@ -71,8 +71,6 @@ class FriendsList extends React.Component{
     const ignored = allFriends.filter(friend => friend.statusId === 4);
 
     const allItems = [[...friendsConfirmed], [...waitingForConfirmation], [...requestReceived], [...recommendReceived], [...ignored]];
-    console.log(allItems)
-    console.log(allItems[this.state.view]);
     const filteredItems = allItems[this.state.view].filter(
       item => users[item.id].firstName.toLowerCase().includes(this.state.filter.trim().toLowerCase()) || 
               users[item.id].lastName.toLowerCase().includes(this.state.filter.trim().toLowerCase())

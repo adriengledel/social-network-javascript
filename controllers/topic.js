@@ -4,7 +4,6 @@ import sendMail from "../mailSender/chatInvitation";
 var date = new Date();
 
 export function createTopic(req, socket){
-  console.log(1)
   var topic = {
     adminTopicId : req.userIdSender,
     topic        : req.topic,
@@ -48,7 +47,6 @@ export function addFriendToTopic(req, socket){
 }
 
 export function joinTopic(req, socket){
-  console.log(req)
   topics.updateOne({topicId : req.topicId},
     {
       $pull : {
@@ -63,7 +61,6 @@ export function joinTopic(req, socket){
       }
     }, (err, result) => {
       topics.find({}, function (err, results) {
-        console.log('join', results)
         socket.emit('topicsData', results);
         socket.broadcast.emit('topicsData', results);
       });
@@ -82,7 +79,6 @@ export function messageTopic(req, socket){
       }
     }, (err, result) => {
       topics.find({}, function (err, results) {
-        console.log(results)
         socket.emit('topicsData', results);
         /* socket.broadcast.emit('topicsData', results); */
         socket.broadcast.to(req.topicId).emit('topicsData', results);
@@ -100,7 +96,6 @@ export function deleteMessageTopic(req, socket){
       }
     }, (err, result) => {
       topics.find({}, function (err, results) {
-        console.log(results)
         socket.emit('topicsData', results);
        /*  socket.broadcast.emit('topicsData', results); */
         socket.to(req.topicId).emit('topicsData', results);
@@ -121,7 +116,6 @@ export function leaveTopic(req, socket){
       }
     }, (err, result) => {
       topics.find({}, function (err, results) {
-        console.log(results)
         let test = results.filter(topic => req.topicId !== topic.topicId);
         socket.emit('topicsData', test);
         /* socket.broadcast.emit('topicsData', results); */
@@ -133,7 +127,6 @@ export function leaveTopic(req, socket){
 
 export function connectTopic(req, socket){
   topics.find({}, function (err, results) {
-    console.log(results)
     let test = results.filter(topic => req.topicId !== topic.topicId);
     socket.emit('topicsData', test);
   });

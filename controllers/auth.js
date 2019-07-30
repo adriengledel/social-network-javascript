@@ -39,7 +39,6 @@ function login(req, res) {
                             });
                             wallJS.find({}, function (err, results) {
                                 var wallJs = {};
-                                console.log(results)
                                 results.forEach(function (result) {
                                     wallJs[result.category] = result;
                                 });

@@ -4,7 +4,6 @@ import sendEmail from "../mailSender/welcomeMail";
 
 
 function signup(req, res) {
-    console.log('signup', req.body)
     var user = {
         pseudo      : req.body.pseudo,
         email       : req.body.email,
@@ -25,12 +24,10 @@ function signup(req, res) {
         User.findOne({
             email: user.email
         }, function (err, result) {
-            console.log(err, result)
             if (err) {
                 reject(500);
             } else {
                 if (result) {
-                    console.log('reject')
                     reject(204)
                 } else {
                     resolve(true)
@@ -43,7 +40,6 @@ function signup(req, res) {
         var _u = new User(user);
         _u.save(function (err, user) {
             if (err) {
-                console.log(err)
                 res.status(500).json({
                     "text": "Erreur interne"
                 })

@@ -65,7 +65,6 @@ export function friendRequest(req, socket) {
 
   }).then(function () {
     friends.find({}, function (err, result) {
-      console.log('emit')
       socket.broadcast.emit('friendsData', result);
       socket.emit('friendsData', result);
       sendEmailRequestFriend(req.email);
@@ -125,7 +124,6 @@ export function recommendFriend(req, socket) {
         }
       },
       function (err, result) {
-        console.log(result)
         resolve(true);
       });
   }).then(function () {
@@ -148,7 +146,6 @@ export function recommendFriend(req, socket) {
           }
         },
         function (err, result) {
-          console.log(result)
         });
 
         friends.findOne({
@@ -194,7 +191,6 @@ export function recommendFriend(req, socket) {
           }
         },
         function (err, result) {
-          console.log(result)
         });
       friends.findOneAndUpdate({
         id: req.friendId

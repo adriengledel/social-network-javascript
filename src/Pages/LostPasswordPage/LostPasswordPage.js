@@ -114,7 +114,6 @@ class LostPasswordPage extends React.Component {
 
     if (email) {
       API.lostpassword({email}).then(res => {
-        console.log(res);
         this.setState({erreurMessage : res.data.erreur});
       });
     }

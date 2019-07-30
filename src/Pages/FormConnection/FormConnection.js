@@ -403,7 +403,6 @@ class FormConnection extends React.Component {
     
         let hasError = false;
 
-        console.log(email)
 
         if (!pseudo) {
             this.setState({pseudoError : true});

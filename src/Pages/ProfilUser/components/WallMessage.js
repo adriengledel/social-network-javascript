@@ -161,7 +161,6 @@ class WallMessage extends React.Component{
   }
 
   handleSendResponse(){
-    console.log('ok')
     const { user, sendResponse, message, userAccount } = this.props;
     const { senderId, recipientId, text, date, id, responses } = message;
     const subId = (responses || []).length+1;

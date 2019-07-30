@@ -147,7 +147,6 @@ class WallJs extends React.Component {
         return true;
       } 
     });
-    console.log(filteredFriends);
 
     const filteredItems = filteredFriends.filter(
       item => item.firstName.toLowerCase().includes(this.state.filter.trim().toLowerCase()) || 

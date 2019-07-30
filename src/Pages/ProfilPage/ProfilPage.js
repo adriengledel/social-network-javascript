@@ -51,7 +51,6 @@ class ProfilPage extends React.Component{
     });
     
     if(!(this.props.usersItemsConnected || []).includes(this.props.user._id)){
-      console.log('IDENTIFY')
       socket.emit('identify', {
         token : JSON.parse(localStorage.getItem('token'))
       });
@@ -62,7 +61,6 @@ class ProfilPage extends React.Component{
     });
 
     socket.on('topicsData', (datas) =>{
-      console.log(datas)
       localStorage.setItem('topics', JSON.stringify(datas));
       this.props.loadTopics(datas);
       /* this.setState({messages : datas}); */
@@ -75,19 +73,16 @@ class ProfilPage extends React.Component{
     });
 
     socket.on('friendsData', (friends) =>{
-      console.log(friends)
       localStorage.setItem('friends', JSON.stringify(friends));
       this.props.loadFriends(friends);
     });
 
     socket.on('wallsData', (walls) =>{
-      console.log(walls)
       localStorage.setItem('walls', JSON.stringify(walls));
       this.props.loadWalls(walls);
     });
 
     socket.on('wallsJSData', (walls) =>{
-      console.log(walls)
       localStorage.setItem('wallJS', JSON.stringify(walls));
       this.props.loadWallJS(walls);
     });
@@ -103,7 +98,6 @@ class ProfilPage extends React.Component{
   
  
   handleAcceptRequest(friendId){
-    console.log('accept', friendId)
     const { user } = this.props;
     this.props.updateFriendRequest(user._id, friendId, 3, 3);
   }

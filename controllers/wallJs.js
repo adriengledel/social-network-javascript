@@ -19,7 +19,6 @@ export function messageJSRequest(req, socket) {
       new walls(wall).save().then(() => {
         walls.find({}, function (err, results) {
           var datas = {};
-          console.log(results)
           results.forEach(function (result) {
             datas[result.category] = result;
           });
@@ -43,10 +42,8 @@ export function messageJSRequest(req, socket) {
         walls.find({}, function (err, results) {
           var wall = {};
           results.forEach(function (result) {
-            console.log(result)
             wall[result.category] = result;
           });
-          console.log('emit')
           socket.broadcast.emit('wallsJSData', wall);
           socket.emit('wallsJSData', wall);
         });

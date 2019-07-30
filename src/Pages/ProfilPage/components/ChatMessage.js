@@ -44,7 +44,6 @@ const Message = styled.div`
 class ChatMessage extends React.Component{
   render(){
     const { message, users, user, deleteMessage } = this.props;
-    console.log(message)
     const sender = users[message.userId];
     return(
       <Container>

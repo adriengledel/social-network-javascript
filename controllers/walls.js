@@ -22,12 +22,9 @@ export function messageRequest(req, socket) {
       new walls(wall).save().then(() => {
         walls.find({}, function (err, results) {
           var datas = {};
-          console.log(results)
           results.forEach(function (result) {
             datas[result.userId] = result;
           });
-          console.log('message', datas)
-          console.log('emit')
           socket.broadcast.emit('wallsData', datas);
           socket.emit('wallsData', datas);
           if(req.email){
@@ -52,10 +49,8 @@ export function messageRequest(req, socket) {
         walls.find({}, function (err, results) {
           var wall = {};
           results.forEach(function (result) {
-            console.log(result)
             wall[result.userId] = result;
           });
-          console.log('emit')
           socket.broadcast.emit('wallsData', wall);
           socket.emit('wallsData', wall);
           if(req.email){
@@ -80,10 +75,8 @@ export function deleteMessage(req, socket){
     walls.find({}, function (err, results) {
       let wall = {};
       results.forEach(function (result) {
-        console.log(result)
         wall[result.userId] = result;
       });
-      console.log('emit')
       socket.broadcast.emit('wallsData', wall);
       socket.emit('wallsData', wall);
     });
@@ -108,10 +101,8 @@ export function responseRequest(req, socket){
     walls.find({}, function (err, results) {
       let wall = {};
       results.forEach(function (result) {
-        console.log(result)
         wall[result.userId] = result;
       });
-      console.log('emit')
       socket.broadcast.emit('wallsData', wall);
       socket.emit('wallsData', wall);
     });
@@ -132,10 +123,8 @@ export function deleteResponse(req, socket){
     walls.find({}, function (err, results) {
       let wall = {};
       results.forEach(function (result) {
-        console.log(result)
         wall[result.userId] = result;
       });
-      console.log('emit')
       socket.broadcast.emit('wallsData', wall);
       socket.emit('wallsData', wall);
     });

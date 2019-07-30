@@ -5,7 +5,6 @@ export const messageRequest = (nameRoom, userIdSender, userIdRecipient, message,
   return (dispatch, getState) => {
     API.wallRequest({nameRoom, userIdSender, userIdRecipient, message, messageId, email, wallId});
     socket.on('privateMessage', (datas) =>{
-      console.log(datas)
       localStorage.setItem('privateMessage', JSON.stringify(datas));
       dispatch(loadWalls(walls));
     });

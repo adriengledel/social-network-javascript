@@ -4,7 +4,6 @@ export const loginRequested = (data) => {
   return (dispatch, getState) => {
 
      API.login(data).then(res => {
-       console.log('res', res)
       localStorage.setItem('token', JSON.stringify(res.data.token));
       localStorage.setItem('users', JSON.stringify(res.data.users));
       localStorage.setItem('user', JSON.stringify(res.data.user));

@@ -204,32 +204,27 @@ class ProfileUser extends React.Component{
     this.handleUpdateUser           = this.handleUpdateUser.bind(this);
 
     if(!(this.props.usersItemsConnected || []).includes(this.props.user._id)){
-      console.log('identify')
       socket.emit('identify', {
         token : JSON.parse(localStorage.getItem('token'))
       });
     }
 
     socket.on('updateUsers', (datas) =>{
-      console.log(datas)
       localStorage.setItem('users', JSON.stringify(datas));
       this.props.updateUsers(datas);
       /* this.setState({messages : datas}); */
     });
     socket.on('friendsData', (friends) =>{
-      console.log(friends)
       localStorage.setItem('friends', JSON.stringify(friends));
       this.props.loadFriends(friends);
     });
 
     socket.on('wallsData', (walls) =>{
-      console.log(walls)
       localStorage.setItem('walls', JSON.stringify(walls));
       this.props.loadWalls(walls);
     });
 
     socket.on('wallsJSData', (walls) =>{
-      console.log(walls)
       localStorage.setItem('wallsJS', JSON.stringify(walls));
       this.props.loadWallJS(walls);
     });
@@ -278,7 +273,6 @@ class ProfileUser extends React.Component{
   }
 
   handleSendResponse(senderId, recipientId, messageId, subMessageId){
-    console.log('ok')
     const { user, users, location } = this.props;
     const id = location.pathname.split('/')[2];
     const email = users[recipientId].email;
@@ -318,7 +312,6 @@ class ProfileUser extends React.Component{
     const friendProfil = myFriends.length >= 1 ? myFriends[0].userId.filter(friend => friend.id === userProfil._id) : [];
     const recommendFilter = myFriendsConfirmed.forEach(friend => {
       let test = [];
-      console.log(friend)
       for(let i = 0; i < friendsList.length; i++){
         if(friend.id === friendsList[i]._id || friend.id === userProfil._id){
           test.push('ami');
@@ -335,7 +328,6 @@ class ProfileUser extends React.Component{
 
     const myMessages = ((walls || [])[id] || []).messages || [];
     const messagesSortByDate = myMessages.sort(compare);
-    console.log(messagesSortByDate)
     
     return(
       <LandingPage history={history}>

@@ -20,7 +20,6 @@ export default {
         return socket.disconnect();
     },
     lostpassword : function(send) {
-        console.log(send)
         return axios.post(url + '/lostpassword',send,{headers: headers})
     },
     friendRequest : function(send){
