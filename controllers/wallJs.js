@@ -1,4 +1,4 @@
-import walls from "../schema/schemaWallJs";
+import walls from "../schema/schemaWalljs";
 
 var date = new Date();
 
