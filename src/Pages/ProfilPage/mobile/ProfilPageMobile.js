@@ -32,6 +32,9 @@ const Content = styled.div`
   margin-top : 50px;
   flex : 1;
   background-color : ${colors.background};
+  display : flex;
+  flex-direction : row;
+  justify-content : center;
 `;
 
 const SwitchContainer = styled.div`
@@ -47,6 +50,10 @@ const User = styled(Link)`
   margin-bottom  : 20px;
   text-decoration : none;
   color : white;
+`;
+
+const WallJsMobile = styled(WallJs)`
+  min-width : 0px;
 `;
 
 class ProfilPageMobile extends React.Component{
@@ -152,7 +159,8 @@ class ProfilPageMobile extends React.Component{
                 users={users}
                 messages={messages}
               /> : 
-              <WallJs 
+              <WallJsMobile
+                mobile 
                 users={users}
                 friends={friends}
                 user={user}

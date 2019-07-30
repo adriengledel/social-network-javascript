@@ -125,7 +125,7 @@ class WallJs extends React.Component {
   }
 
   render(){
-    const { className, users, friends, user, walls } = this.props;
+    const { className, users, friends, user, walls=[], mobile } = this.props;
 
     const usersItems = Object.values(users);
     const myFriends = (friends.filter( friend => friend.id === user._id)[0] || []).userId || [];
@@ -159,11 +159,14 @@ class WallJs extends React.Component {
     return(
       <Container className={className}>
         <Head>
-          <InputSearchList 
-            items={filteredItems}
-            onChange={this.handleSearch}
-            placeholder="Rechercher"
-          />
+          {
+            !mobile ? 
+            <InputSearchList 
+              items={filteredItems}
+              onChange={this.handleSearch}
+              placeholder="Rechercher"
+            /> : null
+          }
         </Head>
         
           <SwitchContainer>
